@@ -40,7 +40,7 @@ Window {
             songIndex: 0
             title: "asfsef"
             authorName: "asfsefefef sfef"
-            imageColor: "red"
+            imageSource: "assets/images/CruelSummer-TaylorSwift.png"
         }
 
         AudioInfoBox {
@@ -54,7 +54,7 @@ Window {
             songIndex: 1
             title: "tttttt"
             authorName: "asfsefefef sfef"
-            imageColor: "yellow"
+            imageSource: "assets/images/FastCar-LukeCombs.png"
         }
 
         AudioInfoBox {
@@ -68,7 +68,21 @@ Window {
             songIndex: 2
             title: "aaaa aaaaaaaa"
             authorName: "asfsefefef sfef"
-            imageColor: "pink"
+            imageSource: "assets/images/PaintTheTownRed-DojaCat.png"
+        }
+
+        AudioInfoBox {
+            id: fourthSong
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                right: parent.right
+                margins: 20
+            }
+            songIndex: 3
+            title: "aaaa aaaaaaaa"
+            authorName: "asfsefefef sfef"
+            imageSource: "assets/images/Snooze-SZA.png"
         }
     }
 
@@ -86,24 +100,24 @@ Window {
             anchors.centerIn: parent
             spacing: 20
 
-            TextButton {
+            ImageButton {
                 id: previousButton
-                width: 50; height: 50;
-                text: "<"
+                width: 60; height: 60;
+                source: "assets/icons/backward-fast.png"
                 onClicked: playerController.switchToPreviousSong()
             }
 
-            TextButton {
+            ImageButton {
                 id: playPauseButton
-                width: 50; height: 50;
-                text: playerController.playing ? "Play" : "Pause"
+                width: 60; height: 60;
+                source: playerController.playing ? "assets/icons/stop.png" : "assets/icons/play.png"
                 onClicked: playerController.playPause()
             }
 
-            TextButton {
+            ImageButton {
                 id: nextButton
-                width: 50; height: 50;
-                text: ">"
+                width: 60; height: 60;
+                source: "assets/icons/forward-fast.png"
                 onClicked: playerController.switchToNextSong()
             }
         }
@@ -113,7 +127,7 @@ Window {
         id: playerController
 
         property int currentSongIndex: 0
-        property int songCount: 3
+        property int songCount: 4
         property bool playing: false
 
         function playPause() {

@@ -17,9 +17,9 @@ qt_add_qml_module(appMusicPlayer
     VERSION 1.0
     QML_FILES Main.qml
     QML_FILES AudioInfoBox.qml
-    QML_FILES TextButton.qml
+    QML_FILES ImageButton.qml
 
-    RESOURCE
+    RESOURCES
     # Music Albums
     assets/images/CruelSummer-TaylorSwift.png
     assets/images/FastCar-LukeCombs.png
@@ -29,7 +29,7 @@ qt_add_qml_module(appMusicPlayer
     assets/icons/backward-fast.png
     assets/icons/forward-fast.png
     assets/icons/play.png
-    assets/icons/play-pause.png
+    assets/icons/stop.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
