@@ -18,6 +18,7 @@ qt_add_qml_module(appMusicPlayer
     QML_FILES Main.qml
     QML_FILES AudioInfoBox.qml
     QML_FILES ImageButton.qml
+    QML_FILES PlayListPanel.qml
 
     RESOURCES
     # Music Albums
@@ -25,12 +26,16 @@ qt_add_qml_module(appMusicPlayer
     assets/images/FastCar-LukeCombs.png
     assets/images/PaintTheTownRed-DojaCat.png
     assets/images/Snooze-SZA.png
+
     # Controller Icons
     assets/icons/itunes.png
     assets/icons/backward-fast.png
     assets/icons/forward-fast.png
     assets/icons/play.png
     assets/icons/stop.png
+    assets/icons/list-music.png
+    assets/icons/trash.png
+
     # Audios
     assets/audio/sample-15s.mp3
     assets/audio/sample-12s.mp3

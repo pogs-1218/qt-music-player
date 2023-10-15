@@ -5,9 +5,7 @@ import MusicPlayer
 Item {
     id: root
 
-    readonly property AudioInfo infoProvider: AudioInfo {}
-
-    visible: PlayerController.currentSongIndex === infoProvider.songIndex
+    visible: !!PlayerController.currentSong
 
     Image {
         id: albumImage
@@ -19,7 +17,7 @@ Item {
         width: 150
         height: 150
 
-        source: infoProvider.imageSource
+        source: PlayerController.currentSong.imageSource
     }
 
     Text {
@@ -34,7 +32,7 @@ Item {
 
         color: "white"
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        text: infoProvider.title
+        text: PlayerController.currentSong.title
 
         font {
             pixelSize: 20
@@ -54,7 +52,7 @@ Item {
 
         color: "gray"
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        text: infoProvider.authorName
+        text: PlayerController.currentSong.authorName
 
         font {
             pixelSize: 16
@@ -63,15 +61,9 @@ Item {
 
     onVisibleChanged: {
         if (visible) {
-            PlayerController.changeAudioSource(infoProvider.audioSource)
+            PlayerController.changeAudioSource(PlayerController.currentSong.audioSource)
         } else {
 
-        }
-    }
-
-    Component.onCompleted: {
-        if (PlayerController.currentSongIndex === infoProvider.songIndex) {
-            PlayerController.changeAudioSource(infoProvider.audioSource)
         }
     }
 }

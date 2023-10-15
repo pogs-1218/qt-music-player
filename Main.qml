@@ -5,7 +5,7 @@ import com.company.PlayerController
 Window {
     id: root
     width: 640
-    height: 480
+    height: 640
     visible: true
     title: qsTr("Music Player")
 
@@ -18,6 +18,22 @@ Window {
         }
         height: 50
         color: "#5F8575"
+
+        ImageButton{
+            id: playlistButton
+            anchors{
+                top: parent.top
+                right: parent.right
+                topMargin: 10
+                rightMargin: 10
+            }
+            width: 30
+            height: 30
+            source:"assets/icons/list-music.png"
+            onClicked: {
+                playlistPanel.hidden = !playlistPanel.hidden
+            }
+        }
     }
 
     Rectangle {
@@ -31,75 +47,13 @@ Window {
         color: "#1e1e1e"
 
         AudioInfoBox {
-            id: firstSong
+            id: songInfo
 
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
                 right: parent.right
                 margins: 20
-            }
-
-            infoProvider {
-                songIndex: 0
-                title: "asfsef"
-                authorName: "asfsefefef sfef"
-                imageSource: "assets/images/CruelSummer-TaylorSwift.png"
-                audioSource: "qrc:/MusicPlayer/assets/audio/sample-15s.mp3"
-            }
-
-        }
-
-        AudioInfoBox {
-            id: secondSong
-            anchors {
-                verticalCenter: parent.verticalCenter
-                left: parent.left
-                right: parent.right
-                margins: 20
-            }
-
-            infoProvider {
-                songIndex: 1
-                title: "tttttt"
-                authorName: "asfsefefef sfef"
-                imageSource: "assets/images/FastCar-LukeCombs.png"
-                audioSource: "qrc:/MusicPlayer/assets/audio/sample-12s.mp3"
-            }
-        }
-
-        AudioInfoBox {
-            id: thirdSong
-            anchors {
-                verticalCenter: parent.verticalCenter
-                left: parent.left
-                right: parent.right
-                margins: 20
-            }
-
-            infoProvider {
-                songIndex: 2
-                title: "aaaa aaaaaaaa"
-                authorName: "asfsefefef sfef"
-                imageSource: "assets/images/PaintTheTownRed-DojaCat.png"
-                audioSource: "qrc:/MusicPlayer/assets/audio/sample-9s.mp3"
-            }
-        }
-
-        AudioInfoBox {
-            id: fourthSong
-            anchors {
-                verticalCenter: parent.verticalCenter
-                left: parent.left
-                right: parent.right
-                margins: 20
-            }
-            infoProvider {
-                songIndex: 3
-                title: "aaaa aaaaaaaa"
-                authorName: "asfsefefef sfef"
-                imageSource: "assets/images/Snooze-SZA.png"
-                audioSource: "qrc:/MusicPlayer/assets/audio/sample-6s.mp3"
             }
         }
     }
@@ -117,6 +71,8 @@ Window {
         Row {
             anchors.centerIn: parent
             spacing: 20
+            enabled: !!PlayerController.currentSong
+            opacity: enabled? 1 : 0.3
 
             ImageButton {
                 id: previousButton
@@ -139,6 +95,12 @@ Window {
                 onClicked: PlayerController.switchToNextSong()
             }
         }
+    }
+
+    PlayListPanel {
+        id: playlistPanel
+        anchors.top: topbar.bottom
+        x: hidden ? parent.width : parent.width - width
     }
 
 }
