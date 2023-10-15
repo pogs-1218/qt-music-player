@@ -4,7 +4,7 @@ project(MusicPlayer VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Multimedia)
 
 qt_standard_project_setup()
 
@@ -26,10 +26,19 @@ qt_add_qml_module(appMusicPlayer
     assets/images/PaintTheTownRed-DojaCat.png
     assets/images/Snooze-SZA.png
     # Controller Icons
+    assets/icons/itunes.png
     assets/icons/backward-fast.png
     assets/icons/forward-fast.png
     assets/icons/play.png
     assets/icons/stop.png
+    # Audios
+    assets/audio/sample-15s.mp3
+    assets/audio/sample-12s.mp3
+    assets/audio/sample-9s.mp3
+    assets/audio/sample-6s.mp3
+
+    SOURCES PlayerController.h PlayerController.cpp
+    SOURCES AudioInfo.h AudioInfo.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -45,6 +54,7 @@ set_target_properties(appMusicPlayer PROPERTIES
 
 target_link_libraries(appMusicPlayer
     PRIVATE Qt6::Quick
+    PRIVATE Qt6::Multimedia
 )
 
 include(GNUInstallDirs)

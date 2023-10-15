@@ -1,14 +1,13 @@
 import QtQuick
+import com.company.PlayerController
+import MusicPlayer
 
 Item {
     id: root
 
-    required property int songIndex
-    property alias title: titleText.text
-    property alias authorName: authorText.text
-    property alias imageSource: albumImage.source
+    readonly property AudioInfo infoProvider: AudioInfo {}
 
-    visible: playerController.currentSongIndex === root.songIndex
+    visible: PlayerController.currentSongIndex === infoProvider.songIndex
 
     Image {
         id: albumImage
@@ -19,6 +18,8 @@ Item {
         }
         width: 150
         height: 150
+
+        source: infoProvider.imageSource
     }
 
     Text {
@@ -33,6 +34,7 @@ Item {
 
         color: "white"
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        text: infoProvider.title
 
         font {
             pixelSize: 20
@@ -52,9 +54,24 @@ Item {
 
         color: "gray"
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        text: infoProvider.authorName
 
         font {
             pixelSize: 16
+        }
+    }
+
+    onVisibleChanged: {
+        if (visible) {
+            PlayerController.changeAudioSource(infoProvider.audioSource)
+        } else {
+
+        }
+    }
+
+    Component.onCompleted: {
+        if (PlayerController.currentSongIndex === infoProvider.songIndex) {
+            PlayerController.changeAudioSource(infoProvider.audioSource)
         }
     }
 }

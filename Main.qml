@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Window
+import com.company.PlayerController
 
 Window {
     id: root
@@ -31,16 +32,22 @@ Window {
 
         AudioInfoBox {
             id: firstSong
+
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
                 right: parent.right
                 margins: 20
             }
-            songIndex: 0
-            title: "asfsef"
-            authorName: "asfsefefef sfef"
-            imageSource: "assets/images/CruelSummer-TaylorSwift.png"
+
+            infoProvider {
+                songIndex: 0
+                title: "asfsef"
+                authorName: "asfsefefef sfef"
+                imageSource: "assets/images/CruelSummer-TaylorSwift.png"
+                audioSource: "qrc:/MusicPlayer/assets/audio/sample-15s.mp3"
+            }
+
         }
 
         AudioInfoBox {
@@ -51,10 +58,14 @@ Window {
                 right: parent.right
                 margins: 20
             }
-            songIndex: 1
-            title: "tttttt"
-            authorName: "asfsefefef sfef"
-            imageSource: "assets/images/FastCar-LukeCombs.png"
+
+            infoProvider {
+                songIndex: 1
+                title: "tttttt"
+                authorName: "asfsefefef sfef"
+                imageSource: "assets/images/FastCar-LukeCombs.png"
+                audioSource: "qrc:/MusicPlayer/assets/audio/sample-12s.mp3"
+            }
         }
 
         AudioInfoBox {
@@ -65,10 +76,14 @@ Window {
                 right: parent.right
                 margins: 20
             }
-            songIndex: 2
-            title: "aaaa aaaaaaaa"
-            authorName: "asfsefefef sfef"
-            imageSource: "assets/images/PaintTheTownRed-DojaCat.png"
+
+            infoProvider {
+                songIndex: 2
+                title: "aaaa aaaaaaaa"
+                authorName: "asfsefefef sfef"
+                imageSource: "assets/images/PaintTheTownRed-DojaCat.png"
+                audioSource: "qrc:/MusicPlayer/assets/audio/sample-9s.mp3"
+            }
         }
 
         AudioInfoBox {
@@ -79,10 +94,13 @@ Window {
                 right: parent.right
                 margins: 20
             }
-            songIndex: 3
-            title: "aaaa aaaaaaaa"
-            authorName: "asfsefefef sfef"
-            imageSource: "assets/images/Snooze-SZA.png"
+            infoProvider {
+                songIndex: 3
+                title: "aaaa aaaaaaaa"
+                authorName: "asfsefefef sfef"
+                imageSource: "assets/images/Snooze-SZA.png"
+                audioSource: "qrc:/MusicPlayer/assets/audio/sample-6s.mp3"
+            }
         }
     }
 
@@ -104,49 +122,21 @@ Window {
                 id: previousButton
                 width: 60; height: 60;
                 source: "assets/icons/backward-fast.png"
-                onClicked: playerController.switchToPreviousSong()
+                onClicked: PlayerController.switchToPreviousSong()
             }
 
             ImageButton {
                 id: playPauseButton
                 width: 60; height: 60;
-                source: playerController.playing ? "assets/icons/stop.png" : "assets/icons/play.png"
-                onClicked: playerController.playPause()
+                source: PlayerController.playing ? "assets/icons/stop.png" : "assets/icons/play.png"
+                onClicked: PlayerController.playPause()
             }
 
             ImageButton {
                 id: nextButton
                 width: 60; height: 60;
                 source: "assets/icons/forward-fast.png"
-                onClicked: playerController.switchToNextSong()
-            }
-        }
-    }
-
-    QtObject {
-        id: playerController
-
-        property int currentSongIndex: 0
-        property int songCount: 4
-        property bool playing: false
-
-        function playPause() {
-            playing =  !playing
-        }
-
-        function switchToPreviousSong() {
-            if (currentSongIndex > 0) {
-                currentSongIndex--
-            } else {
-                currentSongIndex = songCount - 1
-            }
-        }
-
-        function switchToNextSong() {
-            if (currentSongIndex + 1 >= songCount) {
-                currentSongIndex = 0
-            } else {
-                currentSongIndex++
+                onClicked: PlayerController.switchToNextSong()
             }
         }
     }
