@@ -19,6 +19,8 @@ qt_add_qml_module(appMusicPlayer
     QML_FILES AudioInfoBox.qml
     QML_FILES ImageButton.qml
     QML_FILES PlayListPanel.qml
+    QML_FILES SearchPanel.qml
+    QML_FILES SearchField.qml
 
     RESOURCES
     # Music Albums
@@ -35,6 +37,9 @@ qt_add_qml_module(appMusicPlayer
     assets/icons/stop.png
     assets/icons/list-music.png
     assets/icons/trash.png
+    assets/icons/add.png
+    assets/icons/search.png
+    assets/icons/undo.png
 
     # Audios
     assets/audio/sample-15s.mp3
@@ -44,6 +49,7 @@ qt_add_qml_module(appMusicPlayer
 
     SOURCES PlayerController.h PlayerController.cpp
     SOURCES AudioInfo.h AudioInfo.cpp
+    SOURCES AudioSearchModel.h AudioSearchModel.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

@@ -10,6 +10,8 @@ Rectangle {
 
     property bool hidden: true
 
+    signal searchRequested
+
     Text {
         id: playlistText
         anchors {
@@ -120,13 +122,15 @@ Rectangle {
             margins:20
         }
         width:32; height:32
+        source: "assets/icons/add.png"
         onClicked: {
-
+            root.searchRequested()
+            root.hidden = true
         }
     }
 
 
-    Behavior on x{
+    Behavior on x {
         PropertyAnimation {
             easing.type: Easing.InOutQuad
             duration: 200

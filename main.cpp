@@ -2,6 +2,7 @@
 #include <QIcon>
 #include <QQmlApplicationEngine>
 
+#include "AudioSearchModel.h"
 #include "PlayerController.h"
 
 int main(int argc, char *argv[])
@@ -16,6 +17,12 @@ int main(int argc, char *argv[])
                                  0,
                                  "PlayerController",
                                  playerController);
+    AudioSearchModel *audioSearchModel = new AudioSearchModel(&app);
+    qmlRegisterSingletonInstance("com.company.AudioSearchModel",
+                                 1,
+                                 0,
+                                 "AudioSearchModel",
+                                 audioSearchModel);
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/MusicPlayer/Main.qml"_qs);

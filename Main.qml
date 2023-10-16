@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Window
 import com.company.PlayerController
+import com.company.AudioSearchModel
 
 Window {
     id: root
@@ -19,8 +20,47 @@ Window {
         height: 50
         color: "#5F8575"
 
+        SearchField {
+            id: searchField
+            anchors {
+                top: parent.top
+                right: returnButton.left
+                left: parent.left
+                margins:10
+            }
+            height: 30
+
+            visible: !searchPanel.hidden
+            enabled: !AudioSearchModel.isSearching
+
+            onAccepted: value=>{
+                            AudioSearchModel.searchSong(value)
+                            topbar.forceActiveFocus()
+                        }
+        }
+
+        ImageButton {
+            id: returnButton
+            visible: !searchPanel.hidden
+
+            anchors {
+                right: parent.right
+                rightMargin: 5
+                verticalCenter: parent.verticalCenter
+            }
+            width: 30
+            height: 30
+
+            source: "assets/icons/undo.png"
+
+            onClicked: {
+                searchPanel.hidden = true
+            }
+        }
+
         ImageButton{
             id: playlistButton
+            visible: searchPanel.hidden
             anchors{
                 top: parent.top
                 right: parent.right
@@ -101,6 +141,19 @@ Window {
         id: playlistPanel
         anchors.top: topbar.bottom
         x: hidden ? parent.width : parent.width - width
+
+        onSearchRequested: {
+            searchPanel.hidden = false
+        }
     }
 
+    SearchPanel {
+        id: searchPanel
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+        height: mainSection.height + bottomBar.height
+        y: hidden ? parent.height : topbar.height
+    }
 }
